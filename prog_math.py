@@ -47,7 +47,6 @@ model += lpSum(produtos_var[prod] for prod in produtos) <= trabalhadores_var * s
 # Leva em consideração o numero de wafers utilizados e a quantidade de silicio possivel para extração apartir de cada wafer
 total_wafers = lpSum(wafer_var[tamanho] * tamanho_wafer[tamanho]["unidades_base"] * tamanho_wafer[tamanho]["eficiencia"] for tamanho in tamanho_wafer)
 
-
 # Restrições para definir o silício disponível com base no fornecedor escolhido
 for sup in fornecedores:
     model += silicio_efetivo >= fornecedores[sup]["eficiencia"] * total_wafers - (1 - fornecedor_vars[sup]) * 1e6, f"silicio_efetivo_Lower_{sup}"

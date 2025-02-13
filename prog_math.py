@@ -16,10 +16,10 @@ fornecedores = {
 }
 
 produtos = {
-    "Accell": {"unidades_base": 2, "demanda": 500, "valor_venda": 10},
-    "Gyro": {"unidades_base": 4, "demanda": 200, "valor_venda": 5},
-    "Mag": {"unidades_base": 1, "demanda": 350, "valor_venda": 8},
-    "BHI": {"unidades_base": 8, "demanda": 100, "valor_venda": 25}
+    "Accell": {"unidades_base": 2, "demanda": 500, "valor_venda": 10},  # Valor por unidade base 5
+    "Gyro": {"unidades_base": 4, "demanda": 200, "valor_venda": 5},     # Valor por unidade base 1.25
+    "Mag": {"unidades_base": 1, "demanda": 350, "valor_venda": 8},      # Valor por unidade base 8
+    "BHI": {"unidades_base": 8, "demanda": 100, "valor_venda": 25}      # Valor por unidade base 3.25
 }
 
 max_trabalhadores = 50

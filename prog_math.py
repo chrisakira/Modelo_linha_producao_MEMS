@@ -26,13 +26,15 @@ max_trabalhadores = 50
 horas_trabalhadas = 8
 sensores_por_trabalhador = 10
 salario_diario_trabalhador = 250
+max_wafer_diario = 10
 
 # Variáveis de decisão
 # No maximo podemos utilizar 10 wafers por dia
-wafer_var = {tamanho: LpVariable(name=f"wafer_{tamanho}", lowBound=0, upBound=10, cat='Integer') for tamanho in tamanho_wafer}
+wafer_var = {tamanho: LpVariable(name=f"wafer_{tamanho}", lowBound=0, upBound=max_wafer_diario, cat='Integer') for tamanho in tamanho_wafer}
 fornecedor_vars = {sup: LpVariable(name=f"fornecedor_{sup}", cat='Binary') for sup in fornecedores}
 produtos_var = {prod: LpVariable(name=f"produto_{prod}", lowBound=0, upBound=produtos[prod]["demanda"], cat='Integer') for prod in produtos}
 trabalhadores_var = LpVariable(name="trabalhadores", lowBound=1, upBound=max_trabalhadores,  cat='Integer')
+silicio_efetivo = LpVariable(name="silicio_efetivo", lowBound=0)
 
 # Restrições
 # Podemos ter apenas 1 fornecedor
@@ -45,8 +47,6 @@ model += lpSum(produtos_var[prod] for prod in produtos) <= trabalhadores_var * s
 # Leva em consideração o numero de wafers utilizados e a quantidade de silicio possivel para extração apartir de cada wafer
 total_wafers = lpSum(wafer_var[tamanho] * tamanho_wafer[tamanho]["unidades_base"] * tamanho_wafer[tamanho]["eficiencia"] for tamanho in tamanho_wafer)
 
-# Variável para o silício efetivo disponível
-silicio_efetivo = LpVariable(name="silicio_efetivo", lowBound=0)
 
 # Restrições para definir o silício disponível com base no fornecedor escolhido
 for sup in fornecedores:
